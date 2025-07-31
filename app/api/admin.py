@@ -87,7 +87,7 @@ async def update_system_setting(
         setting.value = setting_data.value
         if setting_data.description:
             setting.description = setting_data.description
-        setting.last_updated = datetime.now(timezone(settings.TIMEZONE))
+        setting.last_updated = datetime.now(timezone("Africa/Blantyre"))
         setting.updated_by = current_user.id
     else:
         # Create new setting
@@ -95,7 +95,7 @@ async def update_system_setting(
             key=setting_data.key,
             value=setting_data.value,
             description=setting_data.description or "",
-            last_updated=datetime.now(timezone(settings.TIMEZONE)),
+            last_updated=datetime.now(timezone("Africa/Blantyre")),
             updated_by=current_user.id
         )
         db.add(setting)
@@ -166,7 +166,7 @@ async def create_user(
         role=role,
         district_id=user_data.district_id,
         is_active=True,
-        created_at=datetime.now(timezone(settings.TIMEZONE))
+        created_at=datetime.now(timezone("Africa/Blantyre"))
     )
     
     db.add(new_user)
