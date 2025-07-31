@@ -1,0 +1,22 @@
+name: Deploying my system
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: backend
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+        with:
+          clean: true
+      - name: Build container
+        run: docker compose -f docker-compose.yml build
+        
+      - name: Stop existing containers
+        run: docker compose -f docker-compose.yml down || true
+        
+      - name: Deploy the backend
+        run: docker compose -f docker-compose.yml up -d
